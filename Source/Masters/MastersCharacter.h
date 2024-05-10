@@ -4,10 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GameplayTagContainer.h"
+#include <GameplayEffectTypes.h>
+#include "AbilitySystemInterface.h"
+#include "MyAttributeSet.h"
 #include "MastersCharacter.generated.h"
 
-UCLASS(config=Game)
-class AMastersCharacter : public ACharacter
+UCLASS(config = Game)
+class AMastersCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -18,6 +22,14 @@ class AMastersCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities, meta = (AllowPrivateAccess = "true"))
+		class UAbilitySystemComponent* AbilitySystemComponent;
+
+	UPROPERTY()
+		class UMyAttributeSet* Attributes;
+
+
 public:
 	AMastersCharacter();
 
